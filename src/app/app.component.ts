@@ -1,13 +1,23 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AfterViewInit, Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'casco';
+
+  constructor() {}
+
+  ngAfterViewInit(): void {
+    document.querySelectorAll('.accordion__item').forEach((el) => {
+      el.addEventListener('click', () => {
+        el.classList.toggle('open');
+      });
+    });
+  }
 }
